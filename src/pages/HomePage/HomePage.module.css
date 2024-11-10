@@ -1,0 +1,45 @@
+.homePage {
+    background-image: url("/src/pages/HomePage/images/Picture.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    color: #F7F7F7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 64px;
+    gap: 16px;
+    overflow-y: hidden;
+}
+
+.desc {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px; 
+}
+
+.title {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.btn {
+    padding: 16px 48.5px;
+    border-radius: 200px;
+    border: none;
+    background-color: #E44848;
+    color: #F7F7F7;
+    max-width: 173px;
+    cursor: pointer;
+    -webkit-transition: background-color 0.3s linear;
+    -ms-transition: background-color 0.3s linear;
+    transition: background-color 0.3s linear;
+}
+
+.btn:hover{
+    
+    background-color: #D84343;
+    -webkit-transition: background-color 0.3s linear;
+    -ms-transition: background-color 0.3s linear;
+    transition: background-color 0.3s linear;
+}

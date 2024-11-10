@@ -1,0 +1,19 @@
+.headRow{
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
+.text{
+    color: #101828;
+    text-decoration: none;
+}
+
+.text:visited, .text:active{
+    color: #101828;
+}
+
+.active{
+    color: #E44848;
+    text-decoration: none;
+}

@@ -1,0 +1,17 @@
+.header {
+    background-color: #F7F7F7;
+    display: flex;
+    align-items: center;
+    padding: 28px 64px;
+    position: relative;
+}
+
+.logo {
+    flex: 0 1 auto; 
+}
+
+.navbar {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+}

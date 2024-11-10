@@ -1,0 +1,37 @@
+.catalogPage {
+  display: flex;
+  flex-direction: row;
+  gap: 64px;
+  justify-content: center;
+  padding-top: 48px;
+}
+
+.loadMoreButton {
+  border: 1px solid #dadde1;
+border-radius: 200px;
+margin-top: 8px;
+margin-bottom: 52px;
+padding: 16px 32px;
+  color: #101828;
+  background-color: transparent;
+  max-width: 145px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s linear;
+  -ms-transition: background-color 0.3s linear;
+  transition: background-color 0.3s linear;
+}
+
+.loadMoreButton:hover {
+  border: 1px solid #d84343;
+  -webkit-transition: border 0.3s linear;
+  -ms-transition: border 0.3s linear;
+  transition: border 0.3s linear;
+}
+
+.cardsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}

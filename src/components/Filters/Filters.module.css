@@ -1,0 +1,136 @@
+.vehicleFilter{
+display: flex;
+flex-direction: column;
+gap: 40px;
+max-width: 360px;
+}
+
+.location{
+    display: flex;
+    flex-direction: column;
+gap: 8px;
+  position: relative;
+}
+
+.locationTitle{
+    font-size: 16px;
+    color: #6C717B;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.locationInput {
+  width: 100%;
+  padding: 16px 20px 16px 48px; 
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  border: none;
+}
+
+.locationInput:focus{
+    border: none;
+    outline: none;
+}
+
+.locationInput::placeholder {
+  color: #6C717B;
+}
+
+.mapIcon {
+  position: absolute;
+  left: 12px;
+  fill: #6C717B;
+  transition: fill 0.3s ease;
+}
+
+.filledIcon {
+  fill: #101828; 
+}
+
+
+.filtersComponent{
+    display: flex;
+    flex-direction: column;
+gap: 32px;
+}
+
+.filters{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.title{
+    color: #475467;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.filterTitle{
+    font-size: 20px;
+    font-weight: 600;
+    color: #101828;
+}
+
+.filterSection {
+  border-top: 1px solid #ddd; 
+  padding-top: 24px; 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.Btn, .selectedBtn{
+    width: 112px;
+    height: 96px;
+    border-radius: 12px;
+    border:1px solid #DADDE1;
+  transition: border 0.5s ease;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.selectedBtn{
+    border:1px solid #E44848;   
+  transition: border 0.5s ease;
+
+}
+
+.Btn img, .selectedBtn img {
+    width: 24px; 
+    height: 24px;
+    margin-right: 8px; 
+}
+
+.Searchbtn {
+    padding: 16px 56.5px;
+    border-radius: 200px;
+    border: none;
+    background-color: #E44848;
+    color: #F7F7F7;
+    max-width: 166px;
+    cursor: pointer;
+    -webkit-transition: background-color 0.3s linear;
+    -ms-transition: background-color 0.3s linear;
+    transition: background-color 0.3s linear;
+}
+
+.Searchbtn:hover{
+    background-color: #D84343;
+    -webkit-transition: background-color 0.3s linear;
+    -ms-transition: background-color 0.3s linear;
+    transition: background-color 0.3s linear;
+}
