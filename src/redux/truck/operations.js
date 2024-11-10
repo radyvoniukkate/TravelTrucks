@@ -28,7 +28,12 @@ export const fetchCampers = createAsyncThunk(
   async (filters = {}, { rejectWithValue }) => {
     console.log("Thunk fetchCampers is called with filters:", filters);
     try {
-      const response = await baseApi.get("/", { params: filters });
+      const response = await axios.get(
+        `https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers`,
+        {
+          params: filters, 
+        }
+      );
       console.log("API response:", response.data);
       return response.data;
     } catch (error) {
@@ -42,7 +47,10 @@ export const fetchCamperById = createAsyncThunk(
   "campers/fetchCamperById",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await baseApi.get(`/${id}`);
+      const response = await axios.get(
+        `https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers/${id}`
+      );
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
