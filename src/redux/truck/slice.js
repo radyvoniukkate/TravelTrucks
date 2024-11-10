@@ -48,6 +48,17 @@ const campersSlice = createSlice({
       .addCase(fetchCampers.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+      })
+    .addCase(fetchCamperById.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCamperById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.list = action.payload;
+      })
+      .addCase(fetchCamperById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
       });
   },
 });
