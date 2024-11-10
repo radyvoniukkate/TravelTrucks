@@ -23,6 +23,7 @@ const [activeButton, setActiveButton] = useState("features");
 
   useEffect(() => {
     dispatch(fetchCamperById(id));
+    console.log("get data", id);
   }, [dispatch, id]);
 
   if (status === "loading") {
