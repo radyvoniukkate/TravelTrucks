@@ -9,12 +9,13 @@ import {
 } from "../../redux/truck/selector";
 import css from "./TrackDetails.module.css";
 import Features from "../Features/Features.jsx";
+import Reviews from "../Reviews/Reviews.jsx";
 import BookForm from "../BookForm/BookForm.jsx"
 
 const TrackDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
+const [activeButton, setActiveButton] = useState("features");
   const [selectedImage, setSelectedImage] = useState("");
   const camper = useSelector(selectCamperDetails);
   const status = useSelector(selectCampersStatus);
@@ -114,9 +115,37 @@ const TrackDetails = () => {
         </div>
         <p className={css.description}>{camper.description}</p>
       </div>
-      <div className={css.interactiveSection}>
-              <Features camperData={camper} />  
-              <BookForm />
+      <div className={css.interactiveSectionWrap}>
+        <div className={css.btnSection}>
+          <button
+            className={`${css.btn} ${
+              activeButton === "features" ? css.activeBtn : ""
+            }`}
+            onClick={() => setActiveButton("features")}
+          >
+            Features
+          </button>
+          <button
+            className={`${css.btn} ${
+              activeButton === "reviews" ? css.activeBtn : ""
+            }`}
+            onClick={() => setActiveButton("reviews")}
+          >
+            Reviews
+          </button>
+        </div>
+        <hr className={css.line}></hr>
+        <div className={css.interactiveSection}>
+          <div className={css.interactiveSection}>
+            {activeButton === "features" && <Features camperData={camper} />}
+            {activeButton === "reviews" && (
+              <Reviews
+                camperData={camper.reviews || []}
+              />
+            )}
+            <BookForm />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import css from "./Filters.module.css";
 import vanIcon from "./images/van.svg";
 import fullyIntegratedIcon from "./images/integrated.svg";
@@ -10,8 +11,9 @@ import kitchen from "./images/kitchen.svg";
 import tv from "./images/tv.svg";
 
 function VehicleFilter() {
-  const [location, setLocation] = useState("");
-  const [vehicleType, setVehicleType] = useState("");
+  const [location, setLocation] = useState(""); 
+  const dispatch = useDispatch();
+  const [vehicleType, setVehicleType] = useState(""); 
   const [equipment, setEquipment] = useState({
     AC: false,
     Automatic: false,
@@ -43,12 +45,19 @@ function VehicleFilter() {
   };
 
   const handleSearch = () => {
-    console.log({
-      location,
-      vehicleType,
-      selectedEquipment: Object.keys(equipment).filter((key) => equipment[key]),
-    });
+  const filters = {
+    location: location || undefined, 
+    type: vehicleType || undefined, 
+    amenities: Object.keys(equipment).filter((key) => equipment[key]), 
   };
+
+  // Видаляємо порожні значення
+  const filteredFilters = Object.fromEntries(Object.entries(filters).filter(([_, v]) => v !== undefined && v.length > 0));
+
+  console.log("Filters перед відправкою:", filteredFilters);
+  dispatch(fetchCampers(filteredFilters));
+};
+
 
   return (
     <div className={css.vehicleFilter}>

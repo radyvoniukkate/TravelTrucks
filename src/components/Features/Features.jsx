@@ -13,7 +13,6 @@ import kitchen from "./images/kitchen.svg";
 import tv from "./images/tv.svg";
 
 const Features = ({ camperData }) => {
-  // змінили camper на camperData
   const [features, setFeatures] = useState([]);
 
   useEffect(() => {

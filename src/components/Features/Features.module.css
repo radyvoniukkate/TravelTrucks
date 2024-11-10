@@ -1,6 +1,6 @@
 .features{
     background-color: #F7F7F7;
-    width: calc((100% - 64px * 2 - 40px) / 2);
+    width: 550px;
     padding: 44px 52px;
     display: flex;
     flex-direction: column;

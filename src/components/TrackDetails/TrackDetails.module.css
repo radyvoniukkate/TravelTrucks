@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     padding: 48px 64px;
+    gap: 60px;
 }
 
 .infoSection{
@@ -45,6 +46,13 @@ font-size: 24px;
 font-size: 24px;
 }
 
+.line{
+    stroke-width: 1px;
+stroke: #dadde1;
+width: 100%;
+opacity: 50%;
+}
+
 .imageGallery{
     display: flex;
     flex-direction: row;
@@ -68,4 +76,25 @@ color: #475467;
     display: flex;
     flex-direction: row;
     gap: 40px;
+    margin-top: 44px;
+}
+
+.btnSection{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.btn{
+    background-color: transparent;
+    border: none;
+    font-weight: 600;
+font-size: 20px;
+line-height: 1.2;
+color: #101828;
+padding-bottom: 24px;
+}
+
+.activeBtn{
+    border-bottom: 5px solid #e44848;
 }

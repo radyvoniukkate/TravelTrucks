@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; // Імпорт useNavigate
+import { useNavigate } from "react-router-dom";
 import css from "./CatalogPage.module.css";
 import Filter from "../../components/Filters/Filters.jsx";
 import TrackCard from "../../components/TrackCard/TrackCard.jsx";
@@ -13,28 +13,34 @@ import {
 
 const CatalogPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Створення змінної навігації
-
+  const navigate = useNavigate();
   const campersData = useSelector(selectCampersList);
-  const campersList = campersData.items || [];
+  const campersList = campersData.items || []; // Перевіряємо, чи є дані
+  const filters = useSelector((state) => state.filters) || {}; // Отримуємо фільтри зі стейту
+  console.log("Filters before dispatch:", filters);
   const status = useSelector(selectCampersStatus);
   const error = useSelector(selectCampersError);
 
   const [visibleCount, setVisibleCount] = useState(4);
 
-  useEffect(() => {
-    dispatch(fetchCampers());
-  }, [dispatch]);
+
+   useEffect(() => {
+     dispatch(fetchCampers({})); // Порожні фільтри за замовчуванням
+   }, [dispatch]);
+
 
   const loadMore = () => {
     setVisibleCount((prevCount) => prevCount + 4);
   };
 
-  // Функція для обробки перенаправлення
   const handleShowMoreClick = (id) => {
-    navigate(`/catalog/${id}`);
+    navigate(`/catalog/${id}`); 
   };
 
+const handleFilterSubmit = () => {
+  dispatch(fetchCampers(filters)); // Завантаження з фільтрацією
+};
+  
   if (status === "loading") {
     return <div>Loading campers...</div>;
   }
@@ -47,17 +53,13 @@ const CatalogPage = () => {
     <div className={css.catalogPage}>
       <Filter />
       <div className={css.cardsContainer}>
-        {campersList.length > 0 ? (
-          campersList.slice(0, visibleCount).map((camper) => (
-            <TrackCard
-              key={camper.id}
-              camper={camper}
-              onShowMore={() => handleShowMoreClick(camper.id)} // Передача функції як пропс
-            />
-          ))
-        ) : (
-          <p>No campers found.</p>
-        )}
+        {campersList.slice(0, visibleCount).map((camper) => (
+          <TrackCard
+            key={camper.id}
+            camper={camper}
+            onShowMore={() => handleShowMoreClick(camper.id)}
+          />
+        ))}
         {visibleCount < campersList.length && (
           <button onClick={loadMore} className={css.loadMoreButton}>
             Load More

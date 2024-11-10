@@ -1,5 +1,5 @@
 .formContainer {
-width: calc((100% - 64px * 2 - 40px) / 2);
+width: 580px;
   padding: 44px 57px;
   border: 1px solid #dadde1;
   border-radius: 10px;
@@ -107,7 +107,7 @@ font-size: 16px;
 }
 
 .datePickerInput {
-  width: 158%;
+  width: 535px;
   padding: 18px;
   border-radius: 10px;
   background-color: #f7f7f7;

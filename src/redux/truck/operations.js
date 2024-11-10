@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import {setFilters} from "./slice"
 
-// Створення інстансу axios з базовим URL
+
 const baseApi = axios.create({
   baseURL: "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers",
   headers: {
@@ -9,7 +10,6 @@ const baseApi = axios.create({
   },
 });
 
-// Інтерцептор для авторизації (якщо потрібен)
 baseApi.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -23,19 +23,20 @@ baseApi.interceptors.request.use(
   }
 );
 
-// Оператор для завантаження всіх кемперів з фільтрами
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
   async (filters = {}, { rejectWithValue }) => {
+    console.log("Thunk fetchCampers is called with filters:", filters);
     try {
       const response = await baseApi.get("/", { params: filters });
+      console.log("API response:", response.data);
       return response.data;
     } catch (error) {
+      console.error("API error:", error.message);
       return rejectWithValue(error.message);
     }
   }
 );
-
 // Оператор для отримання деталей кемпера за ID
 export const fetchCamperById = createAsyncThunk(
   "campers/fetchCamperById",
@@ -48,12 +49,6 @@ export const fetchCamperById = createAsyncThunk(
     }
   }
 );
-
-// Оновлення фільтрів і повторне завантаження списку кемперів
-export const updateFilters = (filters) => (dispatch) => {
-  dispatch(setFilters(filters));
-  dispatch(fetchCampers(filters)); // Оновлює список кемперів на основі нових фільтрів
-};
 
 // Додавання до обраних
 export const addToFavorites = createAsyncThunk(
