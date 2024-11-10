@@ -17,7 +17,7 @@ const TrackDetails = () => {
   const dispatch = useDispatch();
 const [activeButton, setActiveButton] = useState("features");
   const [selectedImage, setSelectedImage] = useState("");
-  const camper = useSelector(selectCamperDetails);
+  const camper = useSelector((state) => state.campers.selectedCamper);
   const status = useSelector(selectCampersStatus);
   const error = useSelector(selectCampersError);
 
