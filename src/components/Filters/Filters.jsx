@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { fetchCampers } from "../../redux/truck/operations";
 import css from "./Filters.module.css";
 import vanIcon from "./images/van.svg";
 import fullyIntegratedIcon from "./images/integrated.svg";
@@ -16,47 +17,70 @@ function VehicleFilter() {
   const [vehicleType, setVehicleType] = useState(""); 
   const [equipment, setEquipment] = useState({
     AC: false,
-    Automatic: false,
-    Kitchen: false,
+    automatic: false,
+    kitchen: false,
     TV: false,
-    Bathroom: false,
+    bathroom: false,
   });
 
   const TypeIcons = {
-    Van: vanIcon,
-    "Fully Integrated": fullyIntegratedIcon,
-    Alcove: alcoveIcon,
+    van: vanIcon,
+    "fullyIntegrated": fullyIntegratedIcon,
+    alcove: alcoveIcon,
   };
 
   const EquipmentIcons = {
     AC: AC,
-    Automatic: automatic,
-    Kitchen: kitchen,
+    automatic: automatic,
+    kitchen: kitchen,
     TV: tv,
-    Bathroom: bath,
+    bathroom: bath,
   };
 
-  const handleLocationChange = (event) => setLocation(event.target.value);
+  const TypeLabels = {
+    van: "Van",
+    fullyIntegrated: "Fully Integrated",
+    alcove: "Alcove",
+  };
 
-  const handleVehicleTypeChange = (type) => setVehicleType(type);
+
+  const handleLocationChange = (event) => setLocation(event.target.value);
 
   const handleEquipmentToggle = (item) => {
     setEquipment((prev) => ({ ...prev, [item]: !prev[item] }));
   };
 
-  const handleSearch = () => {
-  const filters = {
-    location: location || undefined, 
-    type: vehicleType || undefined, 
-    amenities: Object.keys(equipment).filter((key) => equipment[key]), 
-  };
-
-  // Видаляємо порожні значення
-  const filteredFilters = Object.fromEntries(Object.entries(filters).filter(([_, v]) => v !== undefined && v.length > 0));
-
-  console.log("Filters перед відправкою:", filteredFilters);
-  dispatch(fetchCampers(filteredFilters));
+const handleVehicleTypeChange = (type) => {
+  setVehicleType((prevType) => (prevType === type ? "" : type));
 };
+
+
+  const handleSearch = () => {
+   let formattedLocation = location.trim();
+
+   if (
+     formattedLocation &&
+     !formattedLocation.toLowerCase().includes("ukraine")
+   ) {
+     formattedLocation = `Ukraine, ${formattedLocation}`;
+   }
+   const filters = {
+     location: formattedLocation || undefined,
+     form: vehicleType || undefined,
+     amenities: Object.keys(equipment).filter(
+       (key) => key !== "automatic" && equipment[key]
+     ),
+     transmission: equipment.automatic ? "automatic" : undefined,
+   };
+
+   // Видаляємо порожні значення
+   const filteredFilters = Object.fromEntries(
+     Object.entries(filters).filter(([_, v]) => v !== undefined && v.length > 0)
+   );
+
+   console.log("Filters перед відправкою:", filteredFilters);
+   dispatch(fetchCampers(filteredFilters));
+ };
 
 
   return (
@@ -123,7 +147,7 @@ function VehicleFilter() {
         <div className={css.filters}>
           <h4 className={css.filterTitle}>Vehicle type</h4>
           <div className={css.filterSection}>
-            {["Van", "Fully Integrated", "Alcove"].map((type) => (
+            {["van", "fullyIntegrated", "alcove"].map((type) => (
               <button
                 key={type}
                 onClick={() => handleVehicleTypeChange(type)}
@@ -138,7 +162,7 @@ function VehicleFilter() {
                     margin: "0",
                   }}
                 />
-                {type}
+                {TypeLabels[type]}
               </button>
             ))}
           </div>

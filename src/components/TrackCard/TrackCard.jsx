@@ -20,7 +20,22 @@ const TrackCard = ({ camper, onShowMore }) => {
   const [isActive, setIsActive] = useState(false);
   const [features, setFeatures] = useState([]);
 
+useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setIsActive(storedFavorites.some((item) => item.id === camperData.id));
+  }, [camperData.id]);
+
   const toggleHeart = () => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let updatedFavorites;
+
+    if (isActive) {
+      updatedFavorites = storedFavorites.filter((item) => item.id !== camperData.id);
+    } else {
+      updatedFavorites = [{ ...camperData }, ...storedFavorites];
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     setIsActive((prev) => !prev);
   };
 

@@ -6,16 +6,16 @@ import {
   removeFromFavorites,
 } from "./operations";
 
-// Create the campers slice
 const campersSlice = createSlice({
   name: "campers",
   initialState: {
     list: [],
-    favorites: [],
+    favorites: [], // Список улюблених кемперів
     filters: {
       location: "",
       type: "",
       amenities: [],
+      favorites: [],
     },
     status: "idle",
     error: null,
@@ -35,6 +35,14 @@ const campersSlice = createSlice({
     setFilteredItems: (state, action) => {
       state.filteredItems = action.payload;
     },
+    addFavorite: (state, action) => {
+      if (!state.favorites.includes(action.payload)) {
+        state.favorites.push(action.payload);
+      }
+    },
+    removeFavorite: (state, action) => {
+      state.favorites = state.favorites.filter((id) => id !== action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,7 +57,7 @@ const campersSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-    .addCase(fetchCamperById.pending, (state) => {
+      .addCase(fetchCamperById.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchCamperById.fulfilled, (state, action) => {
@@ -63,12 +71,6 @@ const campersSlice = createSlice({
   },
 });
 
-export const {
-  setFilters, 
-  updateFilters, 
-  setFilteredItems, 
-  addFavorite,
-  removeFavorite,
-} = campersSlice.actions;
+export const { setFilters, updateFilters, setFilteredItems, addFavorite, removeFavorite } = campersSlice.actions;
 
 export default campersSlice.reducer;
