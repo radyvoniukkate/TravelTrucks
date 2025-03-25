@@ -57,7 +57,7 @@ const CatalogPage = () => {
 
         {status === "succeeded" && sortedCampers.length === 0 && (
           <div className={css.messageError}>
-            <img className={css.errorImg} src="/src/pages/CatalogPage/images/nodata.jpg" alt="No data" />
+            <img className={css.errorImg} src="/images/nodata.jpg" alt="No data" />
           </div>
         )}
 
